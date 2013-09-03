@@ -21,10 +21,12 @@ let s:Util = unite#sources#outline#import('Util')
 " Outline Info
 
 let s:outline_info = {
-      \ 'heading': '\c^\(struct\|enum\|exception\|service\) [a-zA-Z]',
+      \ 'heading': '\c^\(\(struct\|enum\|exception\|service\) [a-zA-Z]\|\s*\w\S\+\s\S\+\s\{0,1}(\)',
       \ 'highlight_rules': [
       \     { 'name': 'type',
       \       'pattern': '/\(struct\|enum\|exception\)/' },
+      \     { 'name': 'method',
+      \       'pattern': '/\w\S\+\s\S\+\s\{0,1}(/' },
       \ ],
       \}
 
@@ -34,6 +36,5 @@ function! s:outline_info.create_heading(which, heading_line, matched_line, conte
         \ 'level': 1,
         \ 'type' : 'generic',
         \ }
-
   return heading
 endfunction
